@@ -1,0 +1,24 @@
+<div class="center-container">
+  <form [formGroup]="signInForm" (ngSubmit)="signIn()">
+    <mat-form-field class="custom-field">
+      <mat-label>Email or Username</mat-label>
+      <input matInput
+             formControlName="emailOrUsername"
+             required>
+    </mat-form-field>
+
+    <mat-form-field class="custom-field">
+      <mat-label>Password</mat-label>
+      <input type="password"
+             matInput
+             formControlName="password">
+    </mat-form-field>
+
+    <button class="sign-up-button"
+            mat-raised-button
+            type="submit"
+            color="primary">
+      Sign In
+    </button>
+  </form>
+</div>ß

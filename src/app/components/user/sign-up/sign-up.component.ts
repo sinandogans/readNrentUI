@@ -34,7 +34,7 @@ export class SignUpComponent {
   }
 
 
-  signup() {
+  signUp() {
     if (this.signUpForm.valid) {
       this.userService.signUp({
         email: this.signUpForm.value.email,
