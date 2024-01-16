@@ -1,0 +1,20 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #drawer class="sidenav" mode="side" opened="true">
+    <mat-toolbar>
+      <mat-icon>library_books</mat-icon>
+      &nbsp; readNrent
+    </mat-toolbar>
+    <mat-nav-list>
+      <a mat-list-item routerLink="/sign-in">
+        <mat-icon>home</mat-icon> &nbsp;Home</a>
+      <a mat-list-item routerLink="/sign-up">
+        <mat-icon>message</mat-icon> &nbsp;Messages</a>
+      <a mat-list-item routerLink="/sign-up">
+        <mat-icon>notifications</mat-icon> &nbsp;Notifications</a>
+      <a mat-list-item routerLink="/">
+        <mat-icon>home</mat-icon> &nbsp;Profile</a>
+      <a *ngIf="isUserAdmin" mat-list-item routerLink="/">
+        <mat-icon>home</mat-icon> &nbsp;Admin Panel</a>
+    </mat-nav-list>
+  </mat-sidenav>
+</mat-sidenav-container>

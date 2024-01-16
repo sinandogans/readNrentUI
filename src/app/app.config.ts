@@ -11,5 +11,5 @@ export const appConfig: ApplicationConfig = {
     importProvidersFrom(HttpClientModule),
     provideRouter(routes),
     provideAnimations(),
-    provideToastr()]
+    provideToastr(),]
 };

@@ -1,18 +1,25 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {RouterOutlet} from '@angular/router';
+import {Router, RouterOutlet} from '@angular/router';
 import {SignUpComponent} from "./components/user/sign-up/sign-up.component";
 import {ToastrModule} from "ngx-toastr";
-import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {SignInComponent} from "./components/user/sign-in/sign-in.component";
+import {SidebarComponent} from "./components/shared/sidebar/sidebar.component";
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, SignUpComponent, ToastrModule, SignInComponent],
+  imports: [CommonModule, RouterOutlet, SignUpComponent, ToastrModule, SignInComponent, SidebarComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
-export class AppComponent {
+export class AppComponent implements OnInit{
   title = 'readNrentUI';
+
+  constructor(private router: Router) {}
+
+
+  ngOnInit(): void {
+    this.router.navigateByUrl('sign-up'); // Başlangıçta 'sign-up' bileşenini yükle
+  }
 }
