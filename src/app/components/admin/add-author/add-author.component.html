@@ -1,0 +1,47 @@
+<div class="center-container">
+  <form [formGroup]="addAuthorForm" (ngSubmit)="onSubmit()">
+    <mat-form-field class="custom-field">
+      <mat-label>First Name</mat-label>
+      <input matInput
+             formControlName="firstName">
+    </mat-form-field>
+
+    <mat-form-field class="custom-field">
+      <mat-label>Last Name</mat-label>
+      <input matInput
+             formControlName="lastName">
+    </mat-form-field>
+
+    <mat-form-field class="custom-field">
+      <mat-label>Birth Date</mat-label>
+      <input matInput [matDatepicker]="picker1" formControlName="birthDate">
+      <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+      <mat-datepicker #picker1></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field class="custom-field">
+      <mat-label>Death Date</mat-label>
+      <input matInput [matDatepicker]="picker2" formControlName="deathDate">
+      <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+      <mat-datepicker #picker2></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field class="custom-field">
+      <mat-label>About</mat-label>
+      <textarea matInput
+                formControlName="about"></textarea>
+    </mat-form-field>
+
+    <mat-label class="file-upload">
+      <input type="file" (change)="onFileSelected($event)">
+    </mat-label>
+
+    <button class="sign-up-button"
+            mat-raised-button
+            type="submit"
+            color="primary">
+      Add
+    </button>
+  </form>
+</div>
+

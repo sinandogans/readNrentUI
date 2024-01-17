@@ -1,0 +1,17 @@
+<div class="center-container">
+  <form [formGroup]="addCategoryForm" (ngSubmit)="onSubmit()">
+    <mat-form-field class="custom-field">
+      <mat-label>Category</mat-label>
+      <input matInput
+             formControlName="category">
+    </mat-form-field>
+
+    <button class="sign-up-button"
+            mat-raised-button
+            type="submit"
+            color="primary">
+      Add
+    </button>
+  </form>
+</div>
+

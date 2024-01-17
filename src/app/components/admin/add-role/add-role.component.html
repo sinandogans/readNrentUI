@@ -1,0 +1,51 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-6">
+      <div class="center-container">
+        <form [formGroup]="addRoleForm" (ngSubmit)="onSubmit()">
+          <h2 class="form-header">Add Role</h2>
+          <mat-form-field class="custom-field">
+            <mat-label>Role</mat-label>
+            <input matInput
+                   formControlName="role">
+          </mat-form-field>
+
+          <button class="sign-up-button"
+                  mat-raised-button
+                  type="submit"
+                  color="primary">
+            Add
+          </button>
+        </form>
+      </div>
+    </div>
+    <div class="col-6">
+      <div class="center-container">
+        <form [formGroup]="assignRoleForm" (ngSubmit)="onSubmitAssign()">
+          <h2 class="form-header">Assign Role</h2>
+          <mat-form-field class="custom-field">
+            <mat-label>Email or Username</mat-label>
+            <input matInput
+                   formControlName="emailOrUsername">
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-label>Role</mat-label>
+            <mat-select formControlName="role">
+              <mat-option *ngFor="let role of roles" value="{{role.role}}">
+                {{ role.role }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <button class="sign-up-button"
+                  mat-raised-button
+                  type="submit"
+                  color="primary">
+            Assign
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
