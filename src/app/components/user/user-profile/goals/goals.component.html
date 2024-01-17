@@ -1,0 +1,15 @@
+<div *ngFor="let readingGoal of readingGoals" class="goal-container">
+  <div>
+    {{ readingGoal.year }} READING GOAL
+  </div>
+  <div class="progress-container">
+    <mat-progress-bar
+      mode="determinate"
+      [value]="getPercentage(readingGoal)"
+      color="primary"
+    ></mat-progress-bar>
+  </div>
+  <div>
+    {{ readingGoal.yearReadCount }}/{{ readingGoal.goal }} books - %{{ getPercentage(readingGoal) }} completed
+  </div>
+</div>

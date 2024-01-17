@@ -1,0 +1,40 @@
+<div class="cover-photo">
+  <!-- Kapak Fotoğrafı -->
+  <img src="assets/img/default-cover-photo.jpeg" alt="Cover Photo">
+</div>
+
+<div class="profile-container">
+  <!-- Profil Fotoğrafı -->
+  <div class="profile-picture">
+    <img src="assets/img/default-profile-photo.webp" alt="Profile Picture">
+  </div>
+
+  <!-- Kullanıcı Adı -->
+  <!--  <h2>{{ username }}</h2>-->
+
+  <!-- Diğer Profil Bilgileri -->
+  <!-- Buraya kullanıcının diğer bilgilerini ekleyebilirsiniz -->
+</div>
+
+
+<mat-tab-group>
+  <mat-tab label="Library">
+    <app-library
+      [userBooks]="userBooks"
+    ></app-library>
+  </mat-tab>
+  <mat-tab label="Wall">
+    <app-wall></app-wall>
+  </mat-tab>
+  <mat-tab label="Reviews">
+    <app-reviews></app-reviews>
+  </mat-tab>
+  <mat-tab label="Comments">
+    <app-comments></app-comments>
+  </mat-tab>
+  <mat-tab label="Goals">
+    <app-goals
+      [readingGoals]="readingGoals"
+    ></app-goals>
+  </mat-tab>
+</mat-tab-group>

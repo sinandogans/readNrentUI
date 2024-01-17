@@ -7,12 +7,15 @@ import {SignInResponseModel} from "../../components/user/sign-in/models/sign-in-
 import {firstValueFrom, Observable} from "rxjs";
 import {CookieService} from "ngx-cookie-service";
 import {CheckIfUserAdminModel} from "./models/check-if-user-admin.model";
+import {AddRoleRequestModel} from "./models/add-role-request.model";
+import {ResponseModel} from "../../components/shared/response-models/response.model";
+import {GetRolesResponseModel} from "./models/get-roles-response.model";
 
 @Injectable({
   providedIn: 'root'
 })
-export class UserService implements OnDestroy{
-  baseUrl: string = "http://localhost:8080/users";
+export class UserService implements OnDestroy {
+  baseUrl: string = "http://localhost:8080/users/";
   public userSignedInEvent: EventEmitter<any> = new EventEmitter<any>();
 
   constructor(private httpClient: HttpClient, private cookieService: CookieService) {
@@ -24,7 +27,7 @@ export class UserService implements OnDestroy{
 
   signUp(signUpRequestModel: SignUpRequestModel): void {
     this.checkIfPasswordsSame(signUpRequestModel);
-    this.httpClient.post(this.baseUrl + "/register", signUpRequestModel).subscribe(response => {
+    this.httpClient.post(this.baseUrl + "register", signUpRequestModel).subscribe(response => {
     });
   }
 
@@ -34,9 +37,18 @@ export class UserService implements OnDestroy{
   }
 
   signIn(signInRequestModel: SignInRequestModel): Observable<DataResponseModel<SignInResponseModel>> {
-    let response = this.httpClient.post<any>(this.baseUrl + "/login", signInRequestModel);
+    let response = this.httpClient.post<any>(this.baseUrl + "login", signInRequestModel);
     this.cookieService.delete("jwtToken");
     this.setJwtCookie(response);
+    return response;
+  }
+
+  addRole(addRoleRequestModel: AddRoleRequestModel): Observable<ResponseModel> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${this.cookieService.get("jwtToken")}`
+    });
+    let response = this.httpClient.post<any>(this.baseUrl + "add-role", addRoleRequestModel, {headers});
     return response;
   }
 
@@ -52,6 +64,14 @@ export class UserService implements OnDestroy{
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${this.cookieService.get("jwtToken")}`
     });
-    return this.httpClient.get<any>(this.baseUrl + "/is-user-admin", {headers});
+    return this.httpClient.get<any>(this.baseUrl + "is-user-admin", {headers});
+  }
+
+  getRoles(): Observable<DataResponseModel<GetRolesResponseModel[]>> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${this.cookieService.get("jwtToken")}`
+    });
+    return this.httpClient.get<any>(this.baseUrl + "get-roles", {headers});
   }
 }
