@@ -24,6 +24,7 @@ import {UserService} from "../../../services/user/user.service";
 export class SidebarComponent implements OnInit {
 
   isUserAdmin = false;
+  isUserSignedIn = false;
 
   constructor(private router: Router, private userService: UserService) {
   }
@@ -32,6 +33,7 @@ export class SidebarComponent implements OnInit {
     this.checkIsUserAdmin();
     this.userService.userSignedInEvent.subscribe((eventData) => {
       this.checkIsUserAdmin();
+      this.isUserSignedIn = true;
     });
   }
 

@@ -43,11 +43,11 @@ export class SignInComponent {
       this.userService.signIn({
         emailOrUsername: this.signInForm.value.emailOrUsername,
         password: this.signInForm.value.password
-      }).subscribe(response =>{
+      }).subscribe(response => {
         signInResponse = {
-          message : response.message,
-          success : response.success,
-          data : response.data
+          message: response.message,
+          success: response.success,
+          data: response.data
         };
         if (signInResponse.success)
           this.toastr.success(signInResponse.message, "Success");

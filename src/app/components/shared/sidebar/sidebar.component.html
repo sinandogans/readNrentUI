@@ -11,9 +11,13 @@
         <mat-icon>message</mat-icon> &nbsp;Messages</a>
       <a mat-list-item routerLink="/sign-up">
         <mat-icon>notifications</mat-icon> &nbsp;Notifications</a>
-      <a mat-list-item routerLink="/">
+      <a mat-list-item routerLink="/profile">
         <mat-icon>home</mat-icon> &nbsp;Profile</a>
-      <a *ngIf="isUserAdmin" mat-list-item routerLink="/">
+<!--      <a *ngIf="isUserSignedIn" mat-list-item routerLink="/profile">-->
+<!--        <mat-icon>home</mat-icon> &nbsp;Profile</a>-->
+<!--      <a *ngIf="!isUserSignedIn" mat-list-item routerLink="/sign-in">-->
+<!--        <mat-icon>home</mat-icon> &nbsp;Sign In</a>-->
+      <a *ngIf="isUserAdmin" mat-list-item routerLink="/admin">
         <mat-icon>home</mat-icon> &nbsp;Admin Panel</a>
     </mat-nav-list>
   </mat-sidenav>

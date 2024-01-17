@@ -1,16 +1,11 @@
 <div class="center-container">
-  <form [formGroup]="signInForm" (ngSubmit)="signIn()">
+  <input type="file" class="file-upload" onchange="console.log(event.target.files)">
+
+  <form [formGroup]="addBookForm" (ngSubmit)="onSubmit()">
     <mat-form-field class="custom-field">
       <mat-label>Email or Username</mat-label>
       <input matInput
-             formControlName="emailOrUsername"
-             required>
-    </mat-form-field>
-
-    <mat-form-field class="custom-field">
-      <mat-label>Password</mat-label>
-      <input type="password"
-             matInput
+             required
              formControlName="password">
     </mat-form-field>
 
@@ -18,7 +13,8 @@
             mat-raised-button
             type="submit"
             color="primary">
-      Sign In
+      Add
     </button>
   </form>
 </div>
+
