@@ -43,6 +43,10 @@ export class UserService implements OnDestroy {
     return response;
   }
 
+  signOut() {
+    this.cookieService.delete("jwtToken");
+  }
+
   addRole(addRoleRequestModel: AddRoleRequestModel): Observable<ResponseModel> {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
@@ -65,6 +69,14 @@ export class UserService implements OnDestroy {
       'Authorization': `Bearer ${this.cookieService.get("jwtToken")}`
     });
     return this.httpClient.get<any>(this.baseUrl + "is-user-admin", {headers});
+  }
+
+  isUserSignedIn(): Observable<ResponseModel> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${this.cookieService.get("jwtToken")}`
+    });
+    return this.httpClient.get<any>(this.baseUrl + "is-jwt-valid", {headers});
   }
 
   getRoles(): Observable<DataResponseModel<GetRolesResponseModel[]>> {

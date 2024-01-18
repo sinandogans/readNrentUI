@@ -9,6 +9,7 @@ import {UserService} from "../../../services/user/user.service";
 import {ToastrService} from "ngx-toastr";
 import {DataResponseModel} from "../../shared/response-models/data-response.model";
 import {SignInResponseModel} from "./models/sign-in-response.model";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-sign-in',
@@ -30,7 +31,8 @@ export class SignInComponent {
 
   constructor(private fb: FormBuilder,
               private userService: UserService,
-              private toastr: ToastrService) {
+              private toastr: ToastrService,
+              private router: Router) {
     this.signInForm = this.fb.group({
       emailOrUsername: ['', Validators.required],
       password: ['', Validators.required]
@@ -49,14 +51,14 @@ export class SignInComponent {
           success: response.success,
           data: response.data
         };
-        if (signInResponse.success)
+        if (signInResponse.success){
           this.toastr.success(signInResponse.message, "Success");
+          this.router.navigateByUrl("/profile")
+        }
       }, error => {
         this.toastr.error(error.error.message, "Error");
       });
     } else
       this.toastr.error("form valid diil", "Error");
-
   }
-
 }

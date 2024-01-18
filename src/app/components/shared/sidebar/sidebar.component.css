@@ -5,3 +5,18 @@
 .sidenav {
   width: 100%;
 }
+
+.profile-picture {
+  display: inline-flex;
+}
+
+.profile-picture img {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+}
+
+.sidebar-text {
+  margin-top: 20px; !important;
+  margin-left: 5px;
+}

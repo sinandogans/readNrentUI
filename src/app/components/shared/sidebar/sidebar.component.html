@@ -11,14 +11,17 @@
         <mat-icon>message</mat-icon> &nbsp;Messages</a>
       <a mat-list-item routerLink="/sign-up">
         <mat-icon>notifications</mat-icon> &nbsp;Notifications</a>
-      <a mat-list-item routerLink="/profile">
-        <mat-icon>home</mat-icon> &nbsp;Profile</a>
-<!--      <a *ngIf="isUserSignedIn" mat-list-item routerLink="/profile">-->
-<!--        <mat-icon>home</mat-icon> &nbsp;Profile</a>-->
-<!--      <a *ngIf="!isUserSignedIn" mat-list-item routerLink="/sign-in">-->
-<!--        <mat-icon>home</mat-icon> &nbsp;Sign In</a>-->
+      <a *ngIf="isUserSignedIn" mat-list-item routerLink="/profile">
+        <div class="profile-picture">
+          <img src="assets/img/default-profile-photo.webp" alt="Profile Picture">
+        </div>
+        <span class="sidebar-text">&nbsp;Profile</span></a>
+      <a *ngIf="!isUserSignedIn" mat-list-item routerLink="/sign-in">
+        <mat-icon>home</mat-icon> &nbsp;Sign In</a>
       <a *ngIf="isUserAdmin" mat-list-item routerLink="/admin">
-        <mat-icon>home</mat-icon> &nbsp;Admin Panel</a>
+        <mat-icon>security</mat-icon> &nbsp;Admin Panel</a>
+      <a *ngIf="isUserSignedIn" mat-list-item (click)="signOut()">
+        <mat-icon>exit_to_app</mat-icon> &nbsp;Sign Out</a>
     </mat-nav-list>
   </mat-sidenav>
 </mat-sidenav-container>

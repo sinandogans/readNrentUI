@@ -47,7 +47,7 @@ export class AddRoleComponent implements OnInit {
   ngOnInit() {
     this.userService.getRoles().subscribe(response => {
       this.roles = response.data;
-    })
+    });
   }
 
   onSubmit() {

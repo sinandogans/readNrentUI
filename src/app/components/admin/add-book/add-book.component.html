@@ -1,13 +1,58 @@
 <div class="center-container">
-  <input type="file" class="file-upload" onchange="console.log(event.target.files)">
-
   <form [formGroup]="addBookForm" (ngSubmit)="onSubmit()">
     <mat-form-field class="custom-field">
-      <mat-label>Email or Username</mat-label>
+      <mat-label>Name</mat-label>
       <input matInput
-             required
-             formControlName="password">
+             formControlName="name">
     </mat-form-field>
+
+    <mat-form-field class="custom-field">
+      <mat-label>Description</mat-label>
+      <textarea matInput
+                formControlName="description"></textarea>
+    </mat-form-field>
+
+    <mat-form-field class="custom-field">
+      <mat-label>Pages</mat-label>
+      <input matInput
+             type="number"
+             formControlName="pages">
+    </mat-form-field>
+
+    <mat-form-field class="custom-field">
+      <mat-label>Publisher</mat-label>
+      <input matInput
+             formControlName="publisher">
+    </mat-form-field>
+
+    <mat-form-field class="custom-field">
+      <mat-label>Publication Date</mat-label>
+      <input matInput [matDatepicker]="picker" formControlName="publicationDate">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field class="custom-field">
+      <mat-label>Category</mat-label>
+      <mat-select formControlName="category">
+        <mat-option *ngFor="let category of categories" value="{{category.id}}">
+          {{ category.name }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field class="custom-field">
+      <mat-label>Authors</mat-label>
+      <mat-select formControlName="authors" multiple>
+        <mat-option *ngFor="let author of authors" value="{{author.id}}">
+          {{ author.fullName }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-label class="file-upload">
+      <input type="file" (change)="onFileSelected($event)">
+    </mat-label>
 
     <button class="sign-up-button"
             mat-raised-button

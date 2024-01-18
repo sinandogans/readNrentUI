@@ -30,6 +30,7 @@ export class SidebarComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.checkIsUserSignedIn();
     this.checkIsUserAdmin();
     this.userService.userSignedInEvent.subscribe((eventData) => {
       this.checkIsUserAdmin();
@@ -45,5 +46,17 @@ export class SidebarComponent implements OnInit {
     this.userService.isCurrentUserIsAdmin().subscribe(response => {
       this.isUserAdmin = response.data.admin;
     })
+  }
+
+  checkIsUserSignedIn() {
+    this.userService.isUserSignedIn().subscribe(response => {
+      this.isUserSignedIn = response.success;
+    })
+  }
+
+  signOut() {
+    this.userService.signOut();
+    this.isUserSignedIn = false;
+    this.isUserAdmin = false;
   }
 }
