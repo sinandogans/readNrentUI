@@ -13,6 +13,10 @@
   margin-left: 150px;
 }
 
+.user-name{
+  margin-top: 10px;
+}
+
 .profile-picture img {
   width: 150px;
   height: 150px;

@@ -1,14 +1,19 @@
-import {AfterContentInit, Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
+import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {UserBookModel} from "../models/user-book-model";
 import {MatListModule} from "@angular/material/list";
-import {NgForOf} from "@angular/common";
+import {NgForOf, NgIf} from "@angular/common";
+import {AuthorListModel} from "./models/author-list.model";
+import {ReadType} from "../../../../services/library/models/ReadType";
+import {Router} from "@angular/router";
+import {ConversionService} from "../../../../services/shared/conversion/conversion.service";
 
 @Component({
   selector: 'app-library',
   standalone: true,
   imports: [
     MatListModule,
-    NgForOf
+    NgForOf,
+    NgIf
   ],
   templateUrl: './library.component.html',
   styleUrl: './library.component.css'
@@ -16,34 +21,54 @@ import {NgForOf} from "@angular/common";
 export class LibraryComponent implements OnInit, OnChanges {
 
   @Input() userBooks: UserBookModel[];
-  authorAndCountsArray: [string, number][];
+  readBooks: UserBookModel[];
+  toBeReadBooks: UserBookModel[];
+  likedBooks: UserBookModel[];
+  authorList: AuthorListModel[];
 
-  constructor() {
+  constructor(private router: Router,
+              private conversionService: ConversionService) {
   }
 
   ngOnInit() {
-
+    this.readBooks = [];
+    this.toBeReadBooks = [];
+    this.likedBooks = [];
+    this.filterBooks();
+    this.prepareAuthorList();
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (changes['userBooks'] !== undefined)
-      this.getAuthorsAndCounts();
+    if (changes['userBooks'] !== undefined) {
+      this.prepareAuthorList();
+      this.filterBooks();
+    }
   }
 
+  filterBooks() {
+    this.readBooks = this.userBooks.filter(userBook => userBook.readType === ReadType.READ).reverse();
+    this.toBeReadBooks = this.userBooks.filter(userBook => userBook.readType === ReadType.TO_BE_READ).reverse();
+    this.likedBooks = this.userBooks.filter(userBook => userBook.liked).reverse();
+  }
 
-  getAuthorsAndCounts() {
+  prepareAuthorList() {
     if (this.userBooks === undefined)
       return null;
-    let authorAndCounts = new Map<string, number>();
+    let authorMap = new Map<number, AuthorListModel>();
     this.userBooks.forEach(userBook => {
       userBook.book.authors.forEach(author => {
-        let mapValue = authorAndCounts.get(author.name);
+        let mapValue = authorMap.get(author.id);
         if (mapValue === undefined)
-          authorAndCounts.set(author.name, 1);
+          authorMap.set(author.id, {id: author.id, name: author.name, imagePath: author.imagePath, count: 1});
         else
-          authorAndCounts.set(author.name, mapValue + 1);
+          mapValue.count = mapValue.count + 1;
       })
     });
-    this.authorAndCountsArray = Array.from(authorAndCounts).sort();
+    this.authorList = [];
+    authorMap.forEach((value, key) => this.authorList.push(value));
+  }
+
+  navigateToBook(bookId: number, name: string): void {
+    this.router.navigate(['/book', bookId, this.conversionService.convertBookNameToPath(name)]);
   }
 }

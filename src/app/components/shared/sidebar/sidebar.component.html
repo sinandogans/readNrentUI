@@ -13,7 +13,7 @@
         <mat-icon>notifications</mat-icon> &nbsp;Notifications</a>
       <a *ngIf="isUserSignedIn" mat-list-item routerLink="/profile">
         <div class="profile-picture">
-          <img src="../../../../assets/images/default-profile-photo.webp" alt="Profile Picture">
+          <img src="/{{userProfilePhotoPath}}" alt="Profile Picture">
         </div>
         <span class="sidebar-text">&nbsp;Profile</span></a>
       <a *ngIf="!isUserSignedIn" mat-list-item routerLink="/sign-in">

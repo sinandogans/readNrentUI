@@ -1,10 +1,12 @@
 <div class="cover-photo">
-  <img src="../../../../assets/images/default-cover-photo.jpeg" alt="Cover Photo">
+  <img src="/{{user.coverPhotoPath}}" alt="Cover Photo">
 </div>
 
 <div class="profile-container">
   <div class="profile-picture">
-    <img src="../../../../assets/images/default-profile-photo.webp" alt="Profile Picture">
+    <img src="/{{user.profilePhotoPath}}" alt="Profile Picture">
+    <div class="user-name">{{ user.fullName }}</div>
+    <div class="user-username"> &commat;{{ user.username }}</div>
   </div>
 </div>
 

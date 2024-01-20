@@ -10,6 +10,7 @@ import {CheckIfUserAdminModel} from "./models/check-if-user-admin.model";
 import {AddRoleRequestModel} from "./models/add-role-request.model";
 import {ResponseModel} from "../../components/shared/response-models/response.model";
 import {GetRolesResponseModel} from "./models/get-roles-response.model";
+import {UserDetailsModel} from "../../components/user/user-profile/models/user-details.model";
 
 @Injectable({
   providedIn: 'root'
@@ -85,5 +86,13 @@ export class UserService implements OnDestroy {
       'Authorization': `Bearer ${this.cookieService.get("jwtToken")}`
     });
     return this.httpClient.get<any>(this.baseUrl + "get-roles", {headers});
+  }
+
+  getUserDetails(): Observable<DataResponseModel<UserDetailsModel>> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${this.cookieService.get("jwtToken")}`
+    });
+    return this.httpClient.get<any>(this.baseUrl + "get-details", {headers});
   }
 }

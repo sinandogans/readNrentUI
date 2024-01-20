@@ -6,17 +6,38 @@
   margin-top: 20px;
 }
 
-.custom-list {
+.books-list {
   display: flex;
   flex-wrap: wrap;
 }
 
-.custom-list-item {
-  margin: 10px;
+.authors-list {
+  display: block;
 }
 
-.custom-sized-img {
+.book-list-item {
+  margin: 10px;
+  cursor: pointer;
+}
+
+.author-list-item {
+  margin: 10px;
+  cursor: pointer;
+}
+
+.book-image {
   width: 80px;
   height: 120px;
   object-fit: cover;
+}
+
+.author-image {
+  width: 32px;
+  height: 32px;
+  object-fit: cover;
+}
+
+.author-text {
+  display: inline-flex;
+  margin-left: 10px;
 }

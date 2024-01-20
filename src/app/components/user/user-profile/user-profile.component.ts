@@ -8,6 +8,8 @@ import {GoalsComponent} from "./goals/goals.component";
 import {LibraryService} from "../../../services/library/library.service";
 import {ReadingGoalModel} from "./models/reading-goal.model";
 import {UserBookModel} from "./models/user-book-model";
+import {UserDetailsModel} from "./models/user-details.model";
+import {UserService} from "../../../services/user/user.service";
 
 @Component({
   selector: 'app-user-profile',
@@ -25,16 +27,20 @@ import {UserBookModel} from "./models/user-book-model";
 })
 export class UserProfileComponent implements OnInit {
 
+  user: UserDetailsModel;
   readingGoals: ReadingGoalModel[];
   userBooks: UserBookModel[];
 
-  constructor(private libraryService: LibraryService) {
+  constructor(
+    private userService: UserService,
+    private libraryService: LibraryService) {
   }
 
 
   ngOnInit() {
-    this.getReadingGoals();
+    this.getUserDetails();
     this.getUserBooks();
+    this.getReadingGoals();
   }
 
   getReadingGoals() {
@@ -46,6 +52,12 @@ export class UserProfileComponent implements OnInit {
   getUserBooks() {
     this.libraryService.getUserBooks().subscribe(response => {
       this.userBooks = response.data;
+    })
+  }
+
+  getUserDetails() {
+    this.userService.getUserDetails().subscribe(response => {
+      this.user = response.data;
     })
   }
 }

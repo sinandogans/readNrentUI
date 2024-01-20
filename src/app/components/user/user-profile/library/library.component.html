@@ -1,18 +1,39 @@
 <div class="books-container">
-  <h2>Books Read: {{ userBooks.length }}</h2>
-  <div class="custom-list">
-    <div *ngFor="let userBook of userBooks" class="custom-list-item">
-      <img class="custom-sized-img" src="/{{userBook.book.imagePath}}" alt="asdas">
+  <h2>Books Read: {{ readBooks.length }}</h2>
+  <div class="books-list">
+    <div *ngFor="let readBook of readBooks" class="book-list-item"
+         (click)="navigateToBook(readBook.book.id, readBook.book.name)">
+      <img class="book-image" src="/{{readBook.book.imagePath}}" alt="asdas">
     </div>
   </div>
 </div>
 
 <div class="authors-container">
   <h2>According to the authors they read</h2>
-  <mat-list>
-    <mat-list-item *ngFor="let author of authorAndCountsArray">
-      <h4 mat-line>{{ author[0] }}  {{ author[1] }} books</h4>
-    </mat-list-item>
-  </mat-list>
+  <div class="authors-list">
+    <div *ngFor="let author of authorList" class="author-list-item">
+      <img class="author-image" src="/{{author.imagePath}}" alt="asdas">
+      <div class="author-text">{{ author.name }} {{ author.count }} books</div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="toBeReadBooks.length > 0" class="books-container">
+  <h2>Books to Read: {{ toBeReadBooks.length }}</h2>
+  <div class="books-list">
+    <div *ngFor="let book of toBeReadBooks" class="book-list-item"
+         (click)="navigateToBook(book.book.id, book.book.name)">
+      <img class="book-image" src="/{{book.book.imagePath}}" alt="asdas">
+    </div>
+  </div>
+</div>
+
+<div *ngIf="likedBooks.length > 0" class="books-container">
+  <h2>Liked Books: {{ likedBooks.length }}</h2>
+  <div class="books-list">
+    <div *ngFor="let book of likedBooks" class="book-list-item" (click)="navigateToBook(book.book.id,book.book.name)">
+      <img class="book-image" src="/{{book.book.imagePath}}" alt="asdas">
+    </div>
+  </div>
 </div>
 

@@ -1,0 +1,25 @@
+.book-container {
+  margin-top: 50px;
+  display: flex;
+  align-items: center;
+}
+
+.book-image {
+  max-width: 130px;
+  max-height: 200px;
+  margin-right: 20px;
+}
+
+.book-details {
+  flex-grow: 1;
+}
+
+.book-title {
+  font-size: 1.5em;
+  margin-bottom: 5px;
+}
+
+.author-name {
+  font-style: italic;
+  color: #555;
+}

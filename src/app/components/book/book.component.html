@@ -1,0 +1,7 @@
+<div class="book-container">
+  <img class="book-image" src="/{{book.imagePath}}" alt="Book Cover">
+  <div class="book-details">
+    <div class="book-title">{{ book.name }}</div>
+    <div *ngFor="let author of book.authors" class="author-name">{{ author.fullName }}</div>
+  </div>
+</div>
