@@ -51,7 +51,7 @@ export class SignInComponent {
           success: response.success,
           data: response.data
         };
-        if (signInResponse.success){
+        if (signInResponse.success) {
           this.toastr.success(signInResponse.message, "Success");
           this.router.navigateByUrl("/profile")
         }

@@ -16,7 +16,7 @@ import {NgForOf} from "@angular/common";
 export class LibraryComponent implements OnInit, OnChanges {
 
   @Input() userBooks: UserBookModel[];
-  authorAndCounstArray: [string, number][];
+  authorAndCountsArray: [string, number][];
 
   constructor() {
   }
@@ -44,6 +44,6 @@ export class LibraryComponent implements OnInit, OnChanges {
           authorAndCounts.set(author.name, mapValue + 1);
       })
     });
-    this.authorAndCounstArray = Array.from(authorAndCounts).sort();
+    this.authorAndCountsArray = Array.from(authorAndCounts).sort();
   }
 }

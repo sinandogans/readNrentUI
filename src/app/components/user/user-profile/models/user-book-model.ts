@@ -7,11 +7,13 @@ export interface UserBookModel {
   readType: string;
   book: {
     name: string;
+    imagePath: string;
     category: {
       name: string;
     };
     authors: {
       name: string
+      imagePath: string;
     }[]
   };
 }

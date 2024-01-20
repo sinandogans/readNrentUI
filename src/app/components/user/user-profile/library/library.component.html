@@ -1,7 +1,16 @@
+<div class="books-container">
+  <h2>Books Read: {{ userBooks.length }}</h2>
+  <div class="custom-list">
+    <div *ngFor="let userBook of userBooks" class="custom-list-item">
+      <img class="custom-sized-img" src="/{{userBook.book.imagePath}}" alt="asdas">
+    </div>
+  </div>
+</div>
+
 <div class="authors-container">
   <h2>According to the authors they read</h2>
   <mat-list>
-    <mat-list-item *ngFor="let author of authorAndCounstArray">
+    <mat-list-item *ngFor="let author of authorAndCountsArray">
       <h4 mat-line>{{ author[0] }}  {{ author[1] }} books</h4>
     </mat-list-item>
   </mat-list>
