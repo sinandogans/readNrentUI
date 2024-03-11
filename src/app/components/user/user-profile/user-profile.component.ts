@@ -60,4 +60,16 @@ export class UserProfileComponent implements OnInit {
       this.user = response.data;
     })
   }
+
+  getUserBookCount(){
+    return this.userBooks.length;
+  }
+
+  getFollowerCount(){
+    return this.user.followers.length;
+  }
+
+  getFollowingUserCount(){
+    return this.user.followingUsers.length;
+  }
 }

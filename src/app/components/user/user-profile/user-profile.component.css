@@ -10,7 +10,7 @@
 .profile-container {
   margin-top: -50px;
   text-align: left;
-  margin-left: 150px;
+  /*margin-left: 150px;*/
 }
 
 .user-name{
@@ -27,4 +27,18 @@
 
 h2 {
   margin-top: 10px;
+}
+
+.statistics-container{
+  margin-top: 15px;
+
+  .statistic{
+    margin-right: 10px;
+  }
+
+  .number{
+    font-weight: bold;
+    font-size: large;
+    margin-right: 2px;
+  }
 }

@@ -10,6 +10,13 @@
   </div>
 </div>
 
+<div class="statistics-container">
+  <span class="statistic"> <span class="number">{{ getUserBookCount() }}</span> Book</span>
+  <span class="statistic"> <span class="number">{{ getFollowingUserCount() }}</span> Following</span>
+  <span class="statistic"> <span class="number">{{ getFollowerCount() }}</span> Follower</span>
+  <span class="statistic"> {{ user.username }} Review</span>
+</div>
+
 
 <mat-tab-group>
   <mat-tab label="Library">

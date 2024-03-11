@@ -1,0 +1,43 @@
+<div class="metric-container">
+  <div class="metric-item">
+    <span class="icon">⭐</span>
+    <span class="value">{{ book.statistics.review }}/10</span>
+    <span class="small-value">{{ book.statistics.reviewCount }} people</span>
+  </div>
+  <div class="metric-item">
+    <span class="icon">📖</span>
+    <span class="value">{{ book.statistics.readCount }} reads</span>
+  </div>
+  <div class="metric-item">
+    <span class="icon">👍</span>
+    <span class="value">{{ book.statistics.likes }} likes</span>
+  </div>
+  <div class="metric-item">
+    <span class="icon">👀</span>
+    <span class="value">{{ book.statistics.views }} views</span>
+  </div>
+</div>
+
+<div class="about-container">
+  <h2>About</h2>
+  <p>{{ book.description }}</p>
+
+  <div class="author-info">
+    <div>
+      <span class="label">Author:</span>
+      <span *ngFor="let author of book.authors" class="value">{{ author.fullName }}</span>
+    </div>
+    <div>
+      <span class="label">Page Number:</span>
+      <span class="value">{{ book.pages }}</span>
+    </div>
+    <div>
+      <span class="label">Publication Date:</span>
+      <span class="value">{{ book.publicationDate }}</span>
+    </div>
+    <div>
+      <span class="label">Publisher:</span>
+      <span class="value">{{ book.publisher }}</span>
+    </div>
+  </div>
+</div>

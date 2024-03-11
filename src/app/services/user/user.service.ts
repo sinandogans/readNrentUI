@@ -4,7 +4,7 @@ import {SignUpRequestModel} from "../../components/user/sign-up/models/sign-up-r
 import {SignInRequestModel} from "../../components/user/sign-in/models/sign-in-request.model";
 import {DataResponseModel} from "../../components/shared/response-models/data-response.model";
 import {SignInResponseModel} from "../../components/user/sign-in/models/sign-in-response.model";
-import {firstValueFrom, Observable} from "rxjs";
+import {Observable} from "rxjs";
 import {CookieService} from "ngx-cookie-service";
 import {CheckIfUserAdminModel} from "./models/check-if-user-admin.model";
 import {AddRoleRequestModel} from "./models/add-role-request.model";
@@ -38,10 +38,8 @@ export class UserService implements OnDestroy {
   }
 
   signIn(signInRequestModel: SignInRequestModel): Observable<DataResponseModel<SignInResponseModel>> {
-    let response = this.httpClient.post<any>(this.baseUrl + "login", signInRequestModel);
     this.cookieService.delete("jwtToken");
-    this.setJwtCookie(response);
-    return response;
+    return this.httpClient.post<any>(this.baseUrl + "login", signInRequestModel);
   }
 
   signOut() {
@@ -53,15 +51,11 @@ export class UserService implements OnDestroy {
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${this.cookieService.get("jwtToken")}`
     });
-    let response = this.httpClient.post<any>(this.baseUrl + "add-role", addRoleRequestModel, {headers});
-    return response;
+    return this.httpClient.post<any>(this.baseUrl + "add-role", addRoleRequestModel, {headers});
   }
 
-  setJwtCookie(observable: Observable<DataResponseModel<SignInResponseModel>>) {
-    observable.subscribe(response => {
-      this.cookieService.set("jwtToken", response.data.jwtToken);
-      this.userSignedInEvent.emit();
-    });
+  setJwtCookie(jwtToken: string) {
+    this.cookieService.set("jwtToken", jwtToken);
   }
 
   isCurrentUserIsAdmin(): Observable<DataResponseModel<CheckIfUserAdminModel>> {

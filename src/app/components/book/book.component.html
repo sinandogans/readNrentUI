@@ -5,3 +5,17 @@
     <div *ngFor="let author of book.authors" class="author-name">{{ author.fullName }}</div>
   </div>
 </div>
+
+<mat-tab-group>
+  <mat-tab label="Wall">
+    <app-wall></app-wall>
+  </mat-tab>
+  <mat-tab label="Overview">
+    <app-overview
+      [book]="book">
+    </app-overview>
+  </mat-tab>
+  <mat-tab label="Reviews">
+    <app-book-reviews></app-book-reviews>
+  </mat-tab>
+</mat-tab-group>

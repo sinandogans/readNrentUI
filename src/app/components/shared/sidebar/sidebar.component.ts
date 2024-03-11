@@ -32,10 +32,11 @@ export class SidebarComponent implements OnInit {
 
   ngOnInit() {
     this.checkIsUserSignedIn();
-    this.setProfilePhotoPath();
     this.checkIsUserAdmin();
+    this.setProfilePhotoPath();
     this.userService.userSignedInEvent.subscribe((eventData) => {
       this.checkIsUserAdmin();
+      this.setProfilePhotoPath();
       this.isUserSignedIn = true;
     });
   }
@@ -66,5 +67,6 @@ export class SidebarComponent implements OnInit {
     this.userService.signOut();
     this.isUserSignedIn = false;
     this.isUserAdmin = false;
+    this.router.navigate(['/sign-in']);
   }
 }
