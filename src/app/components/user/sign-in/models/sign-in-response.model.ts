@@ -1,3 +1,4 @@
 export interface SignInResponseModel {
-  jwtToken:string;
+  jwtToken: string;
+  username: string;
 }

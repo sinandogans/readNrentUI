@@ -26,17 +26,18 @@ export class SidebarComponent implements OnInit {
   isUserAdmin = false;
   isUserSignedIn = false;
   userProfilePhotoPath: string = "";
+  username: string = "";
 
   constructor(private router: Router, private userService: UserService) {
   }
 
   ngOnInit() {
+    this.getUserDetails();
     this.checkIsUserSignedIn();
     this.checkIsUserAdmin();
-    this.setProfilePhotoPath();
     this.userService.userSignedInEvent.subscribe((eventData) => {
+      this.getUserDetails();
       this.checkIsUserAdmin();
-      this.setProfilePhotoPath();
       this.isUserSignedIn = true;
     });
   }
@@ -45,14 +46,15 @@ export class SidebarComponent implements OnInit {
     this.router.navigateByUrl(componentName);
   }
 
-  setProfilePhotoPath(){
-    this.userService.getUserDetails().subscribe(response=>{
+  getUserDetails() {
+    this.userService.getCurrentUsersDetails().subscribe(response => {
       this.userProfilePhotoPath = response.data.profilePhotoPath;
+      this.username = response.data.username;
     })
   }
 
   checkIsUserAdmin() {
-    this.userService.isCurrentUserIsAdmin().subscribe(response => {
+    this.userService.isCurrentUserAdmin().subscribe(response => {
       this.isUserAdmin = response.data.admin;
     })
   }

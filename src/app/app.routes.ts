@@ -8,7 +8,7 @@ import {AdminComponent} from "./components/admin/admin.component";
 export const routes: Routes = [
   {path: 'sign-up', component: SignUpComponent},
   {path: 'sign-in', component: SignInComponent},
-  {path: 'profile', component: UserProfileComponent},
+  {path: ':username', component: UserProfileComponent},
   {path: 'admin', component: AdminComponent},
   {path: 'book/:id/:name', component: BookComponent}
 ];

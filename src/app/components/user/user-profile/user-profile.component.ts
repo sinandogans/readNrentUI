@@ -10,6 +10,7 @@ import {ReadingGoalModel} from "./models/reading-goal.model";
 import {UserBookModel} from "./models/user-book-model";
 import {UserDetailsModel} from "./models/user-details.model";
 import {UserService} from "../../../services/user/user.service";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-user-profile',
@@ -27,49 +28,59 @@ import {UserService} from "../../../services/user/user.service";
 })
 export class UserProfileComponent implements OnInit {
 
+  username: string;
   user: UserDetailsModel;
   readingGoals: ReadingGoalModel[];
   userBooks: UserBookModel[];
 
   constructor(
     private userService: UserService,
-    private libraryService: LibraryService) {
+    private libraryService: LibraryService,
+    private route: ActivatedRoute) {
   }
 
 
   ngOnInit() {
+    this.route.paramMap.subscribe(params => {
+      this.username = params.get("username");
+      this.prepareComponent();
+    });
+    this.prepareComponent();
+  }
+
+  prepareComponent() {
     this.getUserDetails();
     this.getUserBooks();
     this.getReadingGoals();
   }
 
   getReadingGoals() {
-    this.libraryService.getReadingGoals().subscribe(response => {
+    this.libraryService.getReadingGoals(this.username).subscribe(response => {
       this.readingGoals = response.data;
     })
   }
 
   getUserBooks() {
-    this.libraryService.getUserBooks().subscribe(response => {
+    this.libraryService.getUserBooks(this.username).subscribe(response => {
       this.userBooks = response.data;
     })
   }
 
   getUserDetails() {
-    this.userService.getUserDetails().subscribe(response => {
+    this.userService.getUserDetails(this.username).subscribe(response => {
       this.user = response.data;
     })
   }
 
-  getUserBookCount(){
+  getUserBookCount() {
     return this.userBooks.length;
   }
 
-  getFollowerCount(){
+  getFollowerCount() {
     return this.user.followers.length;
   }
 
-  getFollowingUserCount(){
+  getFollowingUserCount() {
     return this.user.followingUsers.length;
   }
 }

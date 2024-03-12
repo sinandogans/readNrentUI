@@ -1,5 +1,5 @@
-import {EventEmitter, Injectable, OnDestroy} from '@angular/core';
-import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {EventEmitter, Injectable, OnDestroy, OnInit} from '@angular/core';
+import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
 import {SignUpRequestModel} from "../../components/user/sign-up/models/sign-up-request.model";
 import {SignInRequestModel} from "../../components/user/sign-in/models/sign-in-request.model";
 import {DataResponseModel} from "../../components/shared/response-models/data-response.model";
@@ -11,12 +11,13 @@ import {AddRoleRequestModel} from "./models/add-role-request.model";
 import {ResponseModel} from "../../components/shared/response-models/response.model";
 import {GetRolesResponseModel} from "./models/get-roles-response.model";
 import {UserDetailsModel} from "../../components/user/user-profile/models/user-details.model";
+import {resolve} from "@angular/compiler-cli";
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService implements OnDestroy {
-  baseUrl: string = "http://localhost:8080/users/";
+  private baseUrl: string = "http://localhost:8080/users/";
   public userSignedInEvent: EventEmitter<any> = new EventEmitter<any>();
 
   constructor(private httpClient: HttpClient, private cookieService: CookieService) {
@@ -58,7 +59,7 @@ export class UserService implements OnDestroy {
     this.cookieService.set("jwtToken", jwtToken);
   }
 
-  isCurrentUserIsAdmin(): Observable<DataResponseModel<CheckIfUserAdminModel>> {
+  isCurrentUserAdmin(): Observable<DataResponseModel<CheckIfUserAdminModel>> {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${this.cookieService.get("jwtToken")}`
@@ -82,11 +83,20 @@ export class UserService implements OnDestroy {
     return this.httpClient.get<any>(this.baseUrl + "get-roles", {headers});
   }
 
-  getUserDetails(): Observable<DataResponseModel<UserDetailsModel>> {
+  getUserDetails(username: string): Observable<DataResponseModel<UserDetailsModel>> {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${this.cookieService.get("jwtToken")}`
     });
-    return this.httpClient.get<any>(this.baseUrl + "get-details", {headers});
+    const params = new HttpParams().set("username", username);
+    return this.httpClient.get<any>(this.baseUrl + "get-details", {headers: headers, params: params});
+  }
+
+  getCurrentUsersDetails(): Observable<DataResponseModel<UserDetailsModel>> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${this.cookieService.get("jwtToken")}`
+    });
+    return this.httpClient.get<any>(this.baseUrl + "get-current-users-details", {headers: headers});
   }
 }

@@ -11,9 +11,9 @@
         <mat-icon>message</mat-icon> &nbsp;Messages</a>
       <a mat-list-item routerLink="/sign-up">
         <mat-icon>notifications</mat-icon> &nbsp;Notifications</a>
-      <a *ngIf="isUserSignedIn" mat-list-item routerLink="/profile">
+      <a *ngIf="isUserSignedIn" mat-list-item routerLink="/{{username}}">
         <div class="profile-picture">
-          <img src="/{{userProfilePhotoPath}}" alt="Profile Picture">
+          <img src="/{{userProfilePhotoPath}}" alt="Profile">
         </div>
         <span class="sidebar-text">&nbsp;Profile</span></a>
       <a *ngIf="!isUserSignedIn" mat-list-item routerLink="/sign-in">

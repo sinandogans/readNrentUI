@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {DataResponseModel} from "../../components/shared/response-models/data-response.model";
 import {ReadingGoalModel} from "../../components/user/user-profile/models/reading-goal.model";
@@ -16,19 +16,21 @@ export class LibraryService {
               private cookieService: CookieService) {
   }
 
-  getReadingGoals(): Observable<DataResponseModel<ReadingGoalModel[]>> {
+  getReadingGoals(username: string): Observable<DataResponseModel<ReadingGoalModel[]>> {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${this.cookieService.get("jwtToken")}`
     });
-    return this.httpClient.get<any>(this.baseUrl + "/get-reading-goals", {headers});
+    const params = new HttpParams().set("username", username);
+    return this.httpClient.get<any>(this.baseUrl + "/get-reading-goals", {headers: headers, params: params});
   }
 
-  getUserBooks(): Observable<DataResponseModel<UserBookModel[]>> {
+  getUserBooks(username: string): Observable<DataResponseModel<UserBookModel[]>> {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${this.cookieService.get("jwtToken")}`
     });
-    return this.httpClient.get<any>(this.baseUrl + "/get-userbooks", {headers});
+    const params = new HttpParams().set("username", username);
+    return this.httpClient.get<any>(this.baseUrl + "/get-userbooks", {headers: headers, params: params});
   }
 }

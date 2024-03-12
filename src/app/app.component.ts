@@ -22,6 +22,6 @@ export class AppComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.router.navigateByUrl('sign-up'); // Başlangıçta 'sign-up' bileşenini yükle
+    //this.router.navigateByUrl('sign-up'); // Başlangıçta 'sign-up' bileşenini yükle
   }
 }

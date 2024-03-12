@@ -55,7 +55,8 @@ export class SignInComponent {
           this.userService.setJwtCookie(response.data.jwtToken);
           this.userService.userSignedInEvent.emit();
           this.toastr.success(signInResponse.message, "Success");
-          this.router.navigateByUrl("/profile")
+          const url = "/" + response.data.username;
+          this.router.navigateByUrl(url);
         }
       }, error => {
         this.toastr.error(error.error.message, "Error");

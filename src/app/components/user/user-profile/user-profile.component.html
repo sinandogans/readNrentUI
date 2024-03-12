@@ -11,10 +11,15 @@
 </div>
 
 <div class="statistics-container">
-  <span class="statistic"> <span class="number">{{ getUserBookCount() }}</span> Book</span>
-  <span class="statistic"> <span class="number">{{ getFollowingUserCount() }}</span> Following</span>
-  <span class="statistic"> <span class="number">{{ getFollowerCount() }}</span> Follower</span>
-  <span class="statistic"> {{ user.username }} Review</span>
+  <button class="statistic button">
+    <div class="statistic"><span class="number">{{ getUserBookCount() }}</span> Book</div>
+  </button>
+  <button class="button">
+    <div class="statistic"><span class="number">{{ getFollowingUserCount() }}</span> Following</div>
+  </button>
+  <button class="statistic button">
+    <div class="statistic"><span class="number">{{ getFollowerCount() }}</span> Follower</div>
+  </button>
 </div>
 
 
